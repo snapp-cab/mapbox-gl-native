@@ -116,7 +116,11 @@ NS_ASSUME_NONNULL_END
             self.location.coordinate.latitude, self.location.coordinate.longitude,
             self.updating ? @"yes" : @"no",
             self.location.altitude,
+#if TARGET_OS_TV
+            -1.0f,
+#else
             self.heading.trueHeading,
+#endif
             self.title ? [NSString stringWithFormat:@"\"%@\"", self.title] : self.title,
             self.subtitle ? [NSString stringWithFormat:@"\"%@\"", self.subtitle] : self.subtitle];
 }
