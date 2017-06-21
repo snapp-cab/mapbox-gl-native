@@ -3756,7 +3756,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = "framework/Info-static.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.sdk.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.MapboxGL;
 				PRODUCT_NAME = Mapbox;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
@@ -3767,7 +3767,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = "framework/Info-static.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.sdk.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.MapboxGL;
 				PRODUCT_NAME = Mapbox;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;

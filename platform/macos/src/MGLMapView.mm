@@ -263,7 +263,7 @@ public:
     _mbglView = new MGLMapViewImpl(self);
 
     // Delete the pre-offline ambient cache at
-    // ~/Library/Caches/com.mapbox.sdk.ios/cache.db.
+    // ~/Library/Caches/com.mapbox.MapboxGL/cache.db.
     NSURL *cachesDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
                                                                        inDomain:NSUserDomainMask
                                                               appropriateForURL:nil
