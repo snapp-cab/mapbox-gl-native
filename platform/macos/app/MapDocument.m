@@ -13,10 +13,10 @@
 static NSString * const MGLDroppedPinAnnotationImageIdentifier = @"dropped";
 
 static const CLLocationCoordinate2D WorldTourDestinations[] = {
-    { .latitude = 38.9131982, .longitude = -77.0325453144239 },
-    { .latitude = 37.7757368, .longitude = -122.4135302 },
-    { .latitude = 12.9810816, .longitude = 77.6368034 },
-    { .latitude = -13.15589555, .longitude = -74.2178961777998 },
+    { .latitude = 38.9099711, .longitude = -77.0361123 },
+    { .latitude = 37.7884307, .longitude = -122.3998631 },
+    { .latitude = 12.9813016, .longitude = 77.6405126 },
+    { .latitude = -13.155846, .longitude = -74.2178934 },
 };
 
 NS_ARRAY_OF(id <MGLAnnotation>) *MBXFlattenedShapes(NS_ARRAY_OF(id <MGLAnnotation>) *shapes) {
