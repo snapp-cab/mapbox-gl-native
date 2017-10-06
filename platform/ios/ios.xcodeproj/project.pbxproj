@@ -1593,16 +1593,6 @@
 		DAE8CCAD1E6E8C70009B5CB0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAE8CCAE1E6E8C76009B5CB0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Root.strings; sourceTree = "<group>"; };
 		DAE9E0F11EB7BF1B001E8E8B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Foundation.strings; sourceTree = "<group>"; };
-		DAE907681E76AD4600E58785 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS10.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		DAE9076E1E76AF3400E58785 /* Mapbox GL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mapbox GL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAE907711E76AF3400E58785 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DAE907731E76AF3400E58785 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		DAE907741E76AF3400E58785 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		DAE907761E76AF3400E58785 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		DAE907771E76AF3400E58785 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		DAE9077A1E76AF3400E58785 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		DAE9077C1E76AF3400E58785 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DAE9077E1E76AF3400E58785 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAED38611D62D0FC00D7640F /* NSURL+MGLAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MGLAdditions.h"; sourceTree = "<group>"; };
 		DAED38621D62D0FC00D7640F /* NSURL+MGLAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MGLAdditions.m"; sourceTree = "<group>"; };
 		DAEDC4331D603417000224FF /* MGLAttributionInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MGLAttributionInfoTests.m; path = ../../darwin/test/MGLAttributionInfoTests.m; sourceTree = "<group>"; };
@@ -4537,7 +4527,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = tvosapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.MapboxGL;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.tvosapp;
 				PRODUCT_NAME = "Mapbox GL";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -4564,7 +4554,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = tvosapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.MapboxGL;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mapbox.tvosapp;
 				PRODUCT_NAME = "Mapbox GL";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
