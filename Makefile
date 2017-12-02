@@ -249,22 +249,22 @@ ios-static-analyzer: $(IOS_PROJ_PATH)
 
 .PHONY: ipackage
 ipackage: $(IOS_PROJ_PATH)
-	FORMAT=$(FORMAT) BUILD_DEVICE=$(BUILD_DEVICE) SYMBOLS=$(SYMBOLS) \
+	FORMAT=$(FORMAT) BUILD_DEVICE=$(BUILD_DEVICE) BUILD_TV=$(BUILD_TV) SYMBOLS=$(SYMBOLS) \
 	./platform/ios/scripts/package.sh
 
 .PHONY: ipackage-strip
 ipackage-strip: $(IOS_PROJ_PATH)
-	FORMAT=$(FORMAT) BUILD_DEVICE=$(BUILD_DEVICE) SYMBOLS=NO \
+	FORMAT=$(FORMAT) BUILD_DEVICE=$(BUILD_DEVICE) BUILD_TV=$(BUILD_TV) SYMBOLS=NO \
 	./platform/ios/scripts/package.sh
 
 .PHONY: ipackage-sim
 ipackage-sim: $(IOS_PROJ_PATH)
-	BUILDTYPE=Debug FORMAT=dynamic BUILD_DEVICE=false SYMBOLS=$(SYMBOLS) \
+	BUILDTYPE=Debug FORMAT=dynamic BUILD_DEVICE=false BUILD_TV=$(BUILD_TV) SYMBOLS=$(SYMBOLS) \
 	./platform/ios/scripts/package.sh
 
 .PHONY: iframework
 iframework: $(IOS_PROJ_PATH)
-	FORMAT=dynamic BUILD_DEVICE=$(BUILD_DEVICE) SYMBOLS=$(SYMBOLS) \
+	FORMAT=dynamic BUILD_DEVICE=$(BUILD_DEVICE) BUILD_TV=$(BUILD_TV) SYMBOLS=$(SYMBOLS) \
 	./platform/ios/scripts/package.sh
 
 .PHONY: ideploy
