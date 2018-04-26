@@ -476,6 +476,36 @@ public class LatLngBounds implements Parcelable {
     double north = (this.latitudeNorth < latNorth) ? latNorth : this.latitudeNorth;
     double south = (this.latitudeSouth > latSouth) ? latSouth : this.latitudeSouth;
 
+    // longitudes match
+    if (this.longitudeEast == lonEast && this.longitudeWest == lonWest) {
+      return new LatLngBounds(north, lonEast, south, lonWest);
+    }
+
+    boolean eastInThis = containsLongitude(this.longitudeEast, this.longitudeWest, lonEast);
+    boolean westInThis = containsLongitude(this.longitudeEast, this.longitudeWest, lonWest);
+    boolean thisEastInside = containsLongitude(lonEast, lonWest, this.longitudeEast);
+    boolean thisWestInside = containsLongitude(lonEast, lonWest, this.longitudeWest);
+
+    // two intersections on each end - covers entire longitude
+    if (eastInThis && westInThis && thisEastInside && thisWestInside) {
+      return new LatLngBounds(north, GeometryConstants.MAX_LONGITUDE, south, GeometryConstants.MIN_LONGITUDE);
+    }
+
+    if (eastInThis) {
+      if (westInThis) {
+        return new LatLngBounds(north, this.longitudeEast, south, this.longitudeWest);
+      }
+      return new LatLngBounds(north, this.longitudeEast, south, lonWest);
+    }
+
+    if (thisEastInside) {
+      if (thisWestInside) {
+        return new LatLngBounds(north, lonEast, south, lonWest);
+      }
+      return new LatLngBounds(north, lonEast, south, this.longitudeWest);
+    }
+
+    // bounds do not intersect, find where they will form shortest union
     if (LatLngSpan.getLongitudeSpan(lonEast, this.longitudeWest)
       < LatLngSpan.getLongitudeSpan(this.longitudeEast, lonWest)) {
       return new LatLngBounds(north,
@@ -498,30 +528,61 @@ public class LatLngBounds implements Parcelable {
    */
   @Nullable
   public LatLngBounds intersect(LatLngBounds box) {
-    double minLonWest = Math.max(getLonWest(), box.getLonWest());
-    double maxLonEast = Math.min(getLonEast(), box.getLonEast());
-    if (maxLonEast > minLonWest) {
-      double minLatSouth = Math.max(getLatSouth(), box.getLatSouth());
-      double maxLatNorth = Math.min(getLatNorth(), box.getLatNorth());
-      if (maxLatNorth > minLatSouth) {
-        return new LatLngBounds(maxLatNorth, maxLonEast, minLatSouth, minLonWest);
-      }
-    }
-    return null;
+    return intersect(box.getLatNorth(), box.getLonEast(), box.getLatSouth(),box.getLonWest());
   }
 
   /**
    * Returns a new LatLngBounds that is the intersection of this with another LatLngBounds
    *
-   * @param northLatitude Northern Longitude
-   * @param eastLongitude Eastern Latitude
-   * @param southLatitude Southern Longitude
-   * @param westLongitude Western Latitude
+   * @param northLat Northern Longitude
+   * @param eastLon Eastern Latitude
+   * @param southLat Southern Longitude
+   * @param westLon Western Latitude
    * @return LatLngBounds
    */
-  public LatLngBounds intersect(double northLatitude, double eastLongitude, double southLatitude,
-                                double westLongitude) {
-    return intersect(new LatLngBounds(northLatitude, eastLongitude, southLatitude, westLongitude));
+  public LatLngBounds intersect(double northLat, double eastLon, double southLat, double westLon) {
+
+    double maxLatSouth = Math.max(getLatSouth(), southLat);
+    double minLatNorth = Math.min(getLatNorth(), northLat);
+    if (minLatNorth < maxLatSouth) {
+      return null;
+    }
+
+    // longitudes match
+    if (this.longitudeEast == eastLon && this.longitudeWest == westLon) {
+      return new LatLngBounds(minLatNorth, eastLon, maxLatSouth, westLon);
+    }
+
+    boolean eastInThis = containsLongitude(this.longitudeEast, this.longitudeWest, eastLon);
+    boolean westInThis = containsLongitude(this.longitudeEast, this.longitudeWest, westLon);
+    boolean thisEastInside = containsLongitude(eastLon, westLon, this.longitudeEast);
+    boolean thisWestInside = containsLongitude(eastLon, westLon, this.longitudeWest);
+
+    // two intersections : find the one that has longest span
+    if (eastInThis && westInThis && thisEastInside && thisWestInside) {
+
+      if (getLongitudeSpan(eastLon, this.longitudeWest) > getLongitudeSpan(this.longitudeEast, westLon)) {
+        return new LatLngBounds(minLatNorth, eastLon, maxLatSouth, this.longitudeWest);
+      }
+
+      return new LatLngBounds(minLatNorth, this.longitudeEast, maxLatSouth, westLon);
+    }
+
+    if (eastInThis) {
+      if (westInThis) {
+        return new LatLngBounds(minLatNorth, eastLon, maxLatSouth, westLon);
+      }
+      return new LatLngBounds(minLatNorth, eastLon, maxLatSouth, this.longitudeWest);
+    }
+
+    if (thisEastInside) {
+      if (thisWestInside) {
+        return new LatLngBounds(minLatNorth, this.longitudeEast, maxLatSouth, this.longitudeWest);
+      }
+      return new LatLngBounds(minLatNorth, this.longitudeEast, maxLatSouth, westLon);
+    }
+
+    return null;
   }
 
   /**

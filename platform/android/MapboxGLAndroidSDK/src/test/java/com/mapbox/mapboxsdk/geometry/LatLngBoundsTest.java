@@ -391,14 +391,127 @@ public class LatLngBoundsTest {
       .include(new LatLng(-10, -160))
       .build();
 
-    assertEquals("outer union should match",
-      latLngBounds1.union(latLngBounds2),
+    LatLngBounds union1 = latLngBounds1.union(latLngBounds2);
+    LatLngBounds union2 = latLngBounds2.union(latLngBounds1);
+
+    assertEquals(union1,
       new LatLngBounds.Builder()
         .include(new LatLng(10, 160))
         .include(new LatLng(-10, -160))
         .build());
+
+    assertEquals(union1, union2);
   }
 
+  @Test
+  public void unionOverDateLine2() {
+    LatLngBounds latLngBounds1 = new LatLngBounds.Builder()
+      .include(new LatLng(10, 170))
+      .include(new LatLng(0, 160))
+      .build();
+
+    LatLngBounds latLngBounds2 = new LatLngBounds.Builder()
+      .include(new LatLng(0, 165))
+      .include(new LatLng(-10, -160))
+      .build();
+
+    LatLngBounds union1 = latLngBounds1.union(latLngBounds2);
+    LatLngBounds union2 = latLngBounds2.union(latLngBounds1);
+
+    assertEquals(union1,
+      new LatLngBounds.Builder()
+        .include(new LatLng(10, 160))
+        .include(new LatLng(-10, -160))
+        .build());
+
+    assertEquals(union1, union2);
+  }
+
+  @Test
+  public void unionOverDateLine3() {
+    LatLngBounds latLngBounds1 = new LatLngBounds.Builder()
+      .include(new LatLng(10, -165))
+      .include(new LatLng(0, 160))
+      .build();
+
+    LatLngBounds latLngBounds2 = new LatLngBounds.Builder()
+      .include(new LatLng(0, -170))
+      .include(new LatLng(-10, -160))
+      .build();
+
+    LatLngBounds union1 = latLngBounds1.union(latLngBounds2);
+    LatLngBounds union2 = latLngBounds2.union(latLngBounds1);
+
+    assertEquals(union1,
+      new LatLngBounds.Builder()
+        .include(new LatLng(10, 160))
+        .include(new LatLng(-10, -160))
+        .build());
+
+    assertEquals(union1, union2);
+  }
+
+  @Test
+  public void unionOverDateLine4() {
+    LatLngBounds latLngBounds1 = new LatLngBounds.Builder()
+      .include(new LatLng(10, -160))
+      .include(new LatLng(0, 160))
+      .build();
+
+    LatLngBounds latLngBounds2 = new LatLngBounds.Builder()
+      .include(new LatLng(0, -170))
+      .include(new LatLng(-10, -175))
+      .build();
+
+    LatLngBounds union1 = latLngBounds1.union(latLngBounds2);
+    LatLngBounds union2 = latLngBounds2.union(latLngBounds1);
+
+    assertEquals(union1,
+      new LatLngBounds.Builder()
+        .include(new LatLng(10, 160))
+        .include(new LatLng(-10, -160))
+        .build());
+
+    assertEquals(union1, union2);
+  }
+
+  @Test
+  public void unionOverDateLine5() {
+    LatLngBounds latLngBounds1 = new LatLngBounds.Builder()
+      .include(new LatLng(10, -160))
+      .include(new LatLng(0, 160))
+      .build();
+
+    LatLngBounds latLngBounds2 = new LatLngBounds.Builder()
+      .include(new LatLng(0, 170))
+      .include(new LatLng(-10, 175))
+      .build();
+
+    LatLngBounds union1 = latLngBounds1.union(latLngBounds2);
+    LatLngBounds union2 = latLngBounds2.union(latLngBounds1);
+
+    assertEquals(union1,
+      new LatLngBounds.Builder()
+        .include(new LatLng(10, 160))
+        .include(new LatLng(-10, -160))
+        .build());
+
+    assertEquals(union1, union2);
+  }
+
+  @Test
+  public void unionOverDateLineReturnWorldLonSpan() {
+    LatLngBounds latLngBounds1 = LatLngBounds.from(10, -160, -10, -10);
+    LatLngBounds latLngBounds2 =  LatLngBounds.from(10, 10, -10, 160);
+
+    LatLngBounds union1 = latLngBounds1.union(latLngBounds2);
+    LatLngBounds union2 = latLngBounds2.union(latLngBounds1);
+
+    assertEquals(union1, union2);
+    assertEquals(union1, LatLngBounds.from(10, 180, -10, -180));
+
+
+  }
 
   @Test
   public void northWest() {
@@ -579,7 +692,7 @@ public class LatLngBoundsTest {
     LatLngBounds unwrappedBounds = bounds.unwrapBounds();
     assertEquals(bounds.getCenter().wrap(), unwrappedBounds.getCenter().wrap());
     assertEquals(bounds.getSpan(), unwrappedBounds.getSpan());
-    assertTrue(unwrappedBounds.getLonEast() < 0 && unwrappedBounds.getLonWest() < 0);
+    assertTrue(unwrappedBounds.getLonEast() > unwrappedBounds.getLonWest());
 
     LatLngBounds bounds2 = LatLngBounds.from(16.5, -162.8, -35.127709, -177.4);
     assertEquals(bounds2, bounds2.unwrapBounds());
