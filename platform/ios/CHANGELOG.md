@@ -8,8 +8,9 @@ Mapbox welcomes participation and contributions from everyone. Please read [CONT
 
 * Deprecated `+[NSExpression featurePropertiesVariableExpression]` use `+[NSExpression featureAttributesVariableExpression]` instead. ([#11748](https://github.com/mapbox/mapbox-gl-native/pull/11748))
 
-### Other
+### Other changes
 
+* Added a Korean localization. ([#11792](https://github.com/mapbox/mapbox-gl-native/pull/11792))
 * Fixed an issue where `-[MGLMapView metersPerPixelAtLatitude:]` was removed, but not marked as unavailable. ([#11765](https://github.com/mapbox/mapbox-gl-native/pull/11765))
 * Fixed an issue where selecting an onscreen annotation could move the map unintentionally. ([#11731](https://github.com/mapbox/mapbox-gl-native/pull/11731))
 
